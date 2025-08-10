@@ -1,0 +1,45 @@
+[
+  {
+    "branchName": "BRANCHE ADJAGBO 1",
+    "branchMainPastor": "PASTEUR JOHN",
+    "branchLocation": "ADJAGBO VILLAGE",
+    "branchType": "branche",
+    "branchCreationDate": "2024-01-10"
+  },
+  {
+    "branchName": "BRANCHE ADJAGBO 2",
+    "branchMainPastor": "PASTEUR MICHEL",
+    "branchLocation": "ADJAGBO MARKET",
+    "branchType": "cellule",
+    "branchCreationDate": "2024-03-15"
+  },
+  {
+    "branchName": "BRANCHE ADJAGBO 3",
+    "branchMainPastor": "PASTEUR MARIE",
+    "branchLocation": "ADJAGBO SCHOOL",
+    "branchType": "cellule",
+    "branchCreationDate": "2024-06-20"
+  },
+
+  {
+    "branchName": "BRANCHE AHOUATO 1",
+    "branchMainPastor": "PASTEUR PIERRE",
+    "branchLocation": "AHOUATO CENTRE",
+    "branchType": "branche",
+    "branchCreationDate": "2023-11-05"
+  },
+  {
+    "branchName": "BRANCHE AHOUATO 2",
+    "branchMainPastor": "PASTEUR LUC",
+    "branchLocation": "AHOUATO MARKET",
+    "branchType": "cellule",
+    "branchCreationDate": "2024-02-18"
+  },
+  {
+    "branchName": "BRANCHE AHOUATO 3",
+    "branchMainPastor": "PASTEUR SOPHIE",
+    "branchLocation": "AHOUATO SCHOOL",
+    "branchType": "cellule",
+    "branchCreationDate": "2024-07-22"
+  }
+]

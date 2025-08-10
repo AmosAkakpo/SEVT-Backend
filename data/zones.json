@@ -1,0 +1,16 @@
+[
+  {
+    "zoneName": "ADJAGBO",
+    "branchList": ["BRANCHE ADJAGBO 1", "BRANCHE ADJAGBO 2", "BRANCHE ADJAGBO 3"]
+  },
+  {
+    "zoneName": "AHOUATO",
+    "branchList": ["BRANCHE AHOUATO 1", "BRANCHE AHOUATO 2", "BRANCHE AHOUATO 3"]
+  },
+  { "zoneName": "ALLANSANHOME", "branchList": [] },
+  { "zoneName": "DASSEKOME", "branchList": [] },
+  { "zoneName": "KPOSSIDJA", "branchList": [] },
+  { "zoneName": "OUEDO CENTRE", "branchList": [] },
+  { "zoneName": "DESSATO", "branchList": [] },
+  { "zoneName": "ADJAGBO-AIJEDO", "branchList": [] }
+]
