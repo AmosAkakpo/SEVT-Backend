@@ -13,10 +13,10 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
-app.use(branches);
-app.use(zones);
-app.use(finances);
-app.use(services);
+app.use("/branches", branches);
+app.use("/zones", zones);
+app.use("/finances", finances);
+app.use("/services", services);
 
 connect.connectToServer()
   .then(() => {
