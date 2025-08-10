@@ -1,8 +1,7 @@
-
+//new code for render
 const { MongoClient, ServerApiVersion } = require('mongodb');
-require("dotenv").config({path:"./config.env"})
+require("dotenv").config({path:"./config.env"});
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(process.env.ATLAS_URI, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -10,17 +9,44 @@ const client = new MongoClient(process.env.ATLAS_URI, {
     deprecationErrors: true,
   }
 });
-let database
-module.exports = {
-    connectToServer:()=>{
-        database = client.db("sevtdb")
-    },
-    getDb:()=>{
-        return database
-    }
-}
+let database;
 
-console.log('Connected')
+module.exports = {
+  connectToServer: async () => {
+    await client.connect();  // actually connect!
+    database = client.db("sevtdb");
+    console.log("MongoDB connected");
+  },
+  getDb: () => {
+    return database;
+  }
+};
+
+
+//previous code that was working locally 
+// const { MongoClient, ServerApiVersion } = require('mongodb');
+// require("dotenv").config({path:"./config.env"})
+
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+// const client = new MongoClient(process.env.ATLAS_URI, {
+//   serverApi: {
+//     version: ServerApiVersion.v1,
+//     strict: true,
+//     deprecationErrors: true,
+//   }
+// });
+// let database
+// module.exports = {
+//     connectToServer:()=>{
+//         database = client.db("sevtdb")
+//     },
+//     getDb:()=>{
+//         return database
+//     }
+// }
+
+// console.log('Connected')
+
 //this is only used for testing
 // async function run() {
 //   try {
