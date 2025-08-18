@@ -121,28 +121,36 @@ userRoutes.route("/:id").get(async (req, res) => {
   }
 });
 
-// CREATE user
+// CREATE user (only if no user exists)
 userRoutes.route("/").post(async (req, res) => {
   try {
     let db = database.getDb();
-    const takenEmail = await db.collection("users").findOne({ useremail: req.body.useremail });
-    if (takenEmail) {
-      return res.status(409).json({ message: "The email is already taken" });
+
+    // Check if any user already exists
+    const existingUser = await db.collection("users").findOne({});
+    if (existingUser) {
+      return res.status(403).json({ message: "Un compte administrateur existe déjà" });
     }
+
+    // Hash password
     const hashpwd = await bcrypt.hash(req.body.userpwd, SALT_ROUNDS);
+
     let newUser = {
       username: req.body.username,
       useremail: req.body.useremail,
       userpwd: hashpwd,
       joinDate: new Date(),
     };
+
     let result = await db.collection("users").insertOne(newUser);
     res.status(201).json(result);
+
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Erreur serveur" });
   }
 });
+
 
 // UPDATE user by ID
 userRoutes.route("/:id").put(async (req, res) => {
