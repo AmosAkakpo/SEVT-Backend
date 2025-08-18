@@ -7,7 +7,7 @@ const branches = require("./brancheRoutes");
 const zones = require("./zoneRoutes");
 const finances = require("./financeRoutes");
 const services = require("./serviceRoutes");
-
+const users = require("./userRoutes")
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -17,6 +17,8 @@ app.use("/branches", branches);
 app.use("/zones", zones);
 app.use("/finances", finances);
 app.use("/services", services);
+
+app.use("/users",users)
 
 connect.connectToServer()
   .then(() => {

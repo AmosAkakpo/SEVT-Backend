@@ -195,3 +195,21 @@ userRoutes.route("/:id").delete(async (req, res) => {
 });
 
 module.exports = userRoutes;
+
+
+// POST /users/login
+userRoutes.post('/login', async (req, res) => {
+  try {
+    const db = database.getDb();
+    const user = await db.collection('users').findOne({ username: req.body.username });
+    if (!user) return res.status(401).json({ message: 'Nom d’utilisateur incorrect' });
+
+    const isMatch = await bcrypt.compare(req.body.userpwd, user.userpwd);
+    if (!isMatch) return res.status(401).json({ message: 'Mot de passe incorrect' });
+
+    res.status(200).json({ message: 'Login successful' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Erreur serveur' });
+  }
+});
