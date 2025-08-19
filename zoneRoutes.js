@@ -136,24 +136,43 @@ zoneRoutes.route("/:id").put(async (req, res) => {
     if (!isValidObjectId(req.params.id)) {
       return res.status(400).json({ message: "Invalid zone ID" });
     }
+
     let db = database.getDb();
-    let updateData = {
-      $set: {
-        zoneName: req.body.zoneName,
-        branchList: req.body.branchList,
-      }
-    };
-    let data = await db.collection("zones").updateOne({ _id: new ObjectId(req.params.id) }, updateData);
+
+    let updateData = {};
+
+    // if request contains $push → handle it
+    if (req.body.$push) {
+      updateData.$push = req.body.$push;
+    }
+
+    // if request contains $pull → handle it
+    if (req.body.$pull) {
+      updateData.$pull = req.body.$pull;
+    }
+
+    // if request contains normal update fields
+    if (req.body.zoneName || req.body.branchList) {
+      updateData.$set = {};
+      if (req.body.zoneName) updateData.$set.zoneName = req.body.zoneName;
+      if (req.body.branchList) updateData.$set.branchList = req.body.branchList;
+    }
+
+    let data = await db
+      .collection("zones")
+      .updateOne({ _id: new ObjectId(req.params.id) }, updateData);
 
     if (data.matchedCount === 0) {
       return res.status(404).json({ message: "Zone not found" });
     }
+
     res.json(data);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });
   }
 });
+
 
 // DELETE a zone by ID
 zoneRoutes.route("/:id").delete(async (req, res) => {
