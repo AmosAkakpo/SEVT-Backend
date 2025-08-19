@@ -115,7 +115,6 @@ branchRoutes.route("/:id").get(async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
-
 // POST create branch
 branchRoutes.route("/").post(async (req, res) => {
   try {
@@ -123,6 +122,7 @@ branchRoutes.route("/").post(async (req, res) => {
     let mongoObject = {
       branchName: req.body.branchName,
       branchMainPastor: req.body.branchMainPastor,
+      branchmptelephone: req.body.branchmptelephone, // <-- NEW FIELD
       branchLocation: req.body.branchLocation,
       branchType: req.body.branchType,
       branchCreationDate: req.body.branchCreationDate,
@@ -146,12 +146,16 @@ branchRoutes.route("/:id").put(async (req, res) => {
       $set: {
         branchName: req.body.branchName,
         branchMainPastor: req.body.branchMainPastor,
+        branchmptelephone: req.body.branchmptelephone, // <-- NEW FIELD
         branchLocation: req.body.branchLocation,
         branchType: req.body.branchType,
         branchCreationDate: req.body.branchCreationDate,
       }
     };
-    const data = await db.collection("branches").updateOne({ _id: new ObjectId(req.params.id) }, updateData);
+    const data = await db.collection("branches").updateOne(
+      { _id: new ObjectId(req.params.id) },
+      updateData
+    );
     if (data.matchedCount === 0) {
       return res.status(404).json({ error: "Branch not found" });
     }
@@ -161,6 +165,7 @@ branchRoutes.route("/:id").put(async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+
 
 // DELETE branch
 branchRoutes.route("/:id").delete(async (req, res) => {
